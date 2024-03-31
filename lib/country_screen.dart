@@ -43,7 +43,7 @@ class _CountryScreenState extends State<CountryScreen> {
       appBar: AppBar(
           backgroundColor: Color.fromRGBO(34, 43, 72, 1),
           title: Text(
-            'Список Cтран',
+            'Country',
             style: TextStyle(fontSize: 25, color: Colors.white),
           )),
       body: ListView.builder(
