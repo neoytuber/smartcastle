@@ -10,6 +10,7 @@ class Profile extends StatefulWidget {
   String otchestvo;
   String email;
   String city;
+  String password;
 
   Profile(
       {super.key,
@@ -17,7 +18,9 @@ class Profile extends StatefulWidget {
       required this.familya,
       required this.otchestvo,
       required this.email,
-      required this.city});
+      required this.city,
+      required this.password}
+      );
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -62,6 +65,10 @@ class _ProfileState extends State<Profile> {
             widget.city,
             style: TextStyle(fontSize: 20),
           ),
+          Text(widget.password,
+          style: TextStyle(fontSize:20 ),
+          ),
+
           SizedBox(height: 20),
           ElevatedButton(
               onPressed: () {

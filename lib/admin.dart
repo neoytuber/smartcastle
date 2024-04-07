@@ -122,6 +122,7 @@ class _AdminState extends State<Admin> {
                                 otchestvo: '',
                                 email: '',
                                 city: '',
+                                password: '',
                               )));
                 }
               },

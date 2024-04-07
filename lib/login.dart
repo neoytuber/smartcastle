@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lesson4/profile1.dart';
 import 'package:lesson4/registration.dart';
@@ -10,8 +12,44 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController loginController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  bool hidePassword = true;
+  bool loading = false;
+  Future login() async {
+     setState(() {
+       loading = true;
+     });
+    print('login');
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Profile1(
+                  name: '',
+                  surname: '',
+                  patronymic: '',
+                  login: emailController.text,
+                  password: passwordController.text)));
+    } on FirebaseAuthException catch (e) {
+
+      print('error-> ${e.code}');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+        duration: Duration(seconds: 4),
+        content: Text(e.code),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(60))),
+      ));
+    }
+    setState(() {
+      loading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +66,10 @@ class _LoginState extends State<Login> {
         child: Column(
           children: [
             TextField(
-                controller: loginController,
+                controller: emailController,
                 decoration: InputDecoration(
-                    labelText: 'Login',
-                    hintText: 'Enter your login',
+                    labelText: 'e-mail',
+                    hintText: 'Enter your e-mail',
                     contentPadding: EdgeInsets.all(10),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)))),
@@ -46,13 +84,11 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(15))),
             ),
             SizedBox(height: 20),
+            loading == true ? Center(child: CircularProgressIndicator()):
             ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              Profile1(name: '', surname: '', patronymic: '', login: loginController.text, password: passwordController.text,)));
+                onPressed: () async {
+                  FocusScope.of(context).unfocus();
+                    login();
                 },
                 child: Text('Log In')),
             InkWell(

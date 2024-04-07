@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "303724180277",
+    "project_id": "smart-castle-2ab47",
+    "storage_bucket": "smart-castle-2ab47.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303724180277:android:b239b483ec4b54bc21527c",
+        "android_client_info": {
+          "package_name": "com.example.lesson4"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARCiyt5gDG4xuBCaFsE__da-_Z8J2uxms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
